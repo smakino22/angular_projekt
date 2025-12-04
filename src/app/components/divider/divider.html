@@ -1,0 +1,9 @@
+<div class="operation-component divider">
+  <h3>Divider</h3>
+  <div class="actions">
+    <button (click)="incrementA()">Add A (Count: {{countA}})</button>
+    <button (click)="incrementB()">Add B (Count: {{countB}})</button>
+  </div>
+  <p class="result">Current Result: {{result}}</p>
+  <p *ngIf="countB === 0" style="color: red; font-size: 0.8em;">(Division by zero handled as 0)</p>
+</div>

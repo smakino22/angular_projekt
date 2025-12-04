@@ -1,0 +1,8 @@
+<div class="info-component">
+  <h3>Global Stats</h3>
+  <ul>
+    <li><strong>Total Clicks:</strong> {{ statsService.totalClicks$ | async }}</li>
+    <li><strong>Global Sum:</strong> {{ statsService.globalSum$ | async }}</li>
+    <li><strong>Time Since Last Click (ms):</strong> {{ (statsService.averageTime$ | async) | number:'1.0-0' }}</li>
+  </ul>
+</div>

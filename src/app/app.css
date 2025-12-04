@@ -1,0 +1,60 @@
+.dashboard-container {
+  font-family: sans-serif;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.operations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.info-section {
+  border-top: 2px solid #eee;
+  padding-top: 20px;
+}
+
+/* Global styles for components to make them visible */
+.operation-component {
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.operation-component h3 {
+  margin-top: 0;
+}
+
+.actions button {
+  margin: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.result {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-top: 15px;
+}
+
+.info-component {
+  background-color: #eef;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.info-component ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.info-component li {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
