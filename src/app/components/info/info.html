@@ -3,6 +3,12 @@
   <ul>
     <li><strong>Total Clicks:</strong> {{ statsService.totalClicks$ | async }}</li>
     <li><strong>Global Sum:</strong> {{ statsService.globalSum$ | async }}</li>
-    <li><strong>Time Since Last Click (ms):</strong> {{ (statsService.averageTime$ | async) | number:'1.0-0' }}</li>
+    <li>
+      <strong>Average Time (ms):</strong> 
+      <ng-container *ngIf="(statsService.averageTime$ | async) as avg; else naTemplate">
+        {{ avg | number:'1.0-0' }}
+      </ng-container>
+      <ng-template #naTemplate>N/A</ng-template>
+    </li>
   </ul>
 </div>

@@ -8,7 +8,7 @@ export class StatsService {
   // Global Stats
   public totalClicks$ = new BehaviorSubject<number>(0);
   public globalSum$ = new BehaviorSubject<number>(0);
-  public averageTime$ = new BehaviorSubject<number>(0); // Represents "Time Since Last Click"
+  public averageTime$ = new BehaviorSubject<number | null>(null); // Null indicates "N/A"
 
   // Internal State
   private componentValues: { [key: string]: number } = {
@@ -19,6 +19,8 @@ export class StatsService {
   };
 
   private lastClickTime: number = 0;
+  private totalIntervalTime: number = 0;
+  private intervalCount: number = 0;
 
   constructor() {}
 
@@ -29,14 +31,22 @@ export class StatsService {
   registerGlobalClick() {
     const now = Date.now();
     
-    // 1. Update "Time Since Last Click"
-    // If this is NOT the first click (lastClickTime is set), calculate diff
-    if (this.lastClickTime !== 0) {
+    // 1. Update Average Time (Cumulative)
+    if (this.lastClickTime === 0) {
+      // First click ever
+      this.lastClickTime = now;
+      this.averageTime$.next(null); // Still N/A after first click
+    } else {
+      // Subsequent clicks
       const timeDiff = now - this.lastClickTime;
-      this.averageTime$.next(timeDiff);
+      this.totalIntervalTime += timeDiff;
+      this.intervalCount++;
+      
+      const average = this.totalIntervalTime / this.intervalCount;
+      this.averageTime$.next(average);
+      
+      this.lastClickTime = now;
     }
-    // Always update timestamp for the "start" of the next interval
-    this.lastClickTime = now;
 
     // 2. Update Total Clicks
     const currentClicks = this.totalClicks$.value;
